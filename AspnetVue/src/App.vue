@@ -1,38 +1,35 @@
 <template>
   <v-app>
-    <v-toolbar app>
+    <v-toolbar app dark color="primary">
       <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
+        <span>Acceptance</span> &nbsp;
+        <span class="font-weight-light">ASPNETCORE/VUE DEMO</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
     </v-toolbar>
+    <v-content>    
+      <!-- TODO: Progress bar component -->
+      <!-- <v-progress-linear></v-progress-linear> -->
 
-    <v-content>
+      <!-- Alerts bar component -->
+      <Alerts/>
+
       <HelloWorld/>
     </v-content>
+    <v-footer dark color="primary">
+      <v-flex primary text-xs-center white--text> &copy; {{ new Date().getFullYear() }} Acceptance Insurance Company </v-flex>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld'
+import Alerts from './components/Alerts';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    Alerts
   },
-  data () {
-    return {
-      //
-    }
-  }
 }
 </script>

@@ -80,11 +80,17 @@
           </a>
         </v-layout>
       </v-flex>
+      <v-flex>
+        <v-layout>        
+          <v-btn color="primary" @click="doStuff()">Create Alert Success</v-btn>
+        </v-layout>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import { EventBus } from '../utility/event-bus.ts'
   export default {
     data: () => ({
       ecosystem: [
@@ -138,7 +144,12 @@
         }
 
       ]
-    })
+    }),
+    methods: {
+      doStuff() {
+        EventBus.$emit('alert', { value: true, type: 'success', message: 'This is a success alert that is closable.'})
+      }
+    }
   }
 </script>
 
