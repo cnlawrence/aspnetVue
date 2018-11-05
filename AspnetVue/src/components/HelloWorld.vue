@@ -85,6 +85,11 @@
           <v-btn color="primary" @click="doStuff()">Create Alert Success</v-btn>
         </v-layout>
       </v-flex>
+      <v-flex>
+        <v-layout>        
+          <v-btn color="primary" @click="toggleProgress()">Toggle Progress</v-btn>
+        </v-layout>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -148,6 +153,9 @@ import { EventBus } from '../utility/event-bus.ts'
     methods: {
       doStuff() {
         EventBus.$emit('alert', { value: true, type: 'success', message: 'This is a success alert that is closable.'})
+      },
+      toggleProgress() {
+        EventBus.$emit('toggleProgress', { })
       }
     }
   }

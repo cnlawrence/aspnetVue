@@ -7,9 +7,8 @@
       </v-toolbar-title>
     </v-toolbar>
     <v-content>    
-      <!-- TODO: Progress bar component -->
-      <!-- <v-progress-linear></v-progress-linear> -->
-
+      <!-- Progress bar component -->
+      <ProgressBar/>
       <!-- Alerts bar component -->
       <Alerts/>
 
@@ -24,12 +23,14 @@
 <script>
 import HelloWorld from './components/HelloWorld'
 import Alerts from './components/Alerts';
+import ProgressBar from './components/ProgressBar';
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    Alerts
+    Alerts,
+    ProgressBar
   },
 }
 </script>
