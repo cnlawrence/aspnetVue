@@ -96,6 +96,7 @@
 
 <script>
 import { EventBus } from '../utility/event-bus.ts'
+import  alertMixin  from '../shared/alert-mixin.ts'
   export default {
     data: () => ({
       ecosystem: [
@@ -150,9 +151,10 @@ import { EventBus } from '../utility/event-bus.ts'
 
       ]
     }),
+    mixins: [alertMixin],
     methods: {
       doStuff() {
-        EventBus.$emit('alert', { value: true, type: 'success', message: 'This is a success alert that is closable.'})
+        alertMixin.success('Mixin Success!');
       },
       toggleProgress() {
         EventBus.$emit('toggleProgress', { })
