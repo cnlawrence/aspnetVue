@@ -97,6 +97,7 @@
 <script>
 import { EventBus } from '../utility/event-bus.ts'
 import  alertMixin  from '../shared/alert-mixin.ts'
+import  progressBarMixin  from '../shared/progress-bar-mixin.ts'
   export default {
     data: () => ({
       ecosystem: [
@@ -151,13 +152,13 @@ import  alertMixin  from '../shared/alert-mixin.ts'
 
       ]
     }),
-    mixins: [alertMixin],
+    mixins: [alertMixin,progressBarMixin],
     methods: {
       doStuff() {
         alertMixin.success('Mixin Success!');
       },
       toggleProgress() {
-        EventBus.$emit('toggleProgress', { })
+        progressBarMixin.toggle();
       }
     }
   }
