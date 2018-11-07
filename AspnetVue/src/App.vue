@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar app dark color="primary">
+    <v-toolbar app dark>
       <v-toolbar-title class="headline text-uppercase">
         <span>Acceptance</span> &nbsp;
         <span class="font-weight-light">ASPNETCORE/VUE DEMO</span>
