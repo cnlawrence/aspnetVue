@@ -28,7 +28,7 @@ import  alertMixin  from '../shared/alert-mixin.ts'
 import  progressBarMixin  from '../shared/progress-bar-mixin.ts'
   export default {
     data: () => ({
-      
+
     }),
     mixins: [alertMixin,progressBarMixin],
     methods: {

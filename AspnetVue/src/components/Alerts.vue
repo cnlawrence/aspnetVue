@@ -15,8 +15,7 @@ export default {
     }),
     mounted() {
         EventBus.$on('alert', (alerted) => {
-        console.log(alerted);
-        this.alerts.push(alerted);
+            this.alerts.push(alerted);
         });
     }
 }

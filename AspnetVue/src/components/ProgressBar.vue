@@ -13,7 +13,6 @@ export default {
     }),
     mounted() {
         EventBus.$on('toggleProgress', (toggle) => {
-            console.log(toggle);
             this.show = !this.show;
         });
     }
