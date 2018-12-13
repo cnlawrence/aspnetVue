@@ -22,24 +22,32 @@
   </v-container>
 </template>
 
-<script>
-import { EventBus } from '../utility/event-bus.ts'
-import  alertMixin  from '../shared/alert-mixin.ts'
-import  progressBarMixin  from '../shared/progress-bar-mixin.ts'
-  export default {
-    data: () => ({
+<script lang="ts">
+import { EventBus } from '../utility/event-bus'
+import  alertMixin  from '../shared/alert-mixin'
+import  progressBarMixin  from '../shared/progress-bar-mixin'
 
-    }),
-    mixins: [alertMixin,progressBarMixin],
-    methods: {
-      doStuff() {
-        alertMixin.success('Mixin Success!');
-      },
-      toggleProgress() {
-        progressBarMixin.toggle();
-      }
-    }
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component({
+  
+})
+
+export default class HelloWorld extends Vue {
+  
+  constructor() {
+    super();
+    
   }
+
+  doStuff() {
+    alertMixin.success('Mixin Success!');
+  };
+  
+  toggleProgress() {
+    progressBarMixin.toggle();
+  };
+}
 </script>
 
 <style>

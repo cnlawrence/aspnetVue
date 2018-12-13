@@ -11,7 +11,7 @@ export default {
     data: () => ({
         show: false,
     }),
-    mounted() {
+    created() {
         EventBus.$on('toggleProgress', (toggle) => {
             this.show = !this.show;
         });

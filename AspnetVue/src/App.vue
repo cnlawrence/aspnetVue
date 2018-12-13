@@ -40,7 +40,9 @@ import DataServices from './services/data-services';
 
 export default class App extends Vue {
 
-  created() {
+  constructor() {
+    super();
+
     const urlParams = new URLSearchParams(window.location.search);
     const sessionId = urlParams.get('sessionId');
     
@@ -48,13 +50,17 @@ export default class App extends Vue {
     if (sessionId === null) {
     
       console.log('SessionId is null')
-      //TODO: This does not work
+      // TODO: This does not work
       alertMixin.error('Something is wrong with the SessionId.');
       return;
     }
             
-    //TODO: This does not work
+    // TODO: This does not work
+    console.log('toggle on')
     progressBarMixin.toggle();
+
+    // This works
+    // setTimeout(() => {progressBarMixin.toggle();}, 1)
 
     DataServices.getUserSessionData(sessionId)
       .then((result) => {
@@ -67,10 +73,15 @@ export default class App extends Vue {
       })
       .finally(() => {
         // This works
-        //progressBarMixin.toggle();
+        // console.log('toggle off')
+        // progressBarMixin.toggle();
       });
-  };
+  }
+
+  // created() {
+    
+  // };
   
-  //mixins: [alertMixin, progressBarMixin];
+  // mixins: [alertMixin, progressBarMixin];
 }
 </script>
