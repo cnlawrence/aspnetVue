@@ -1,7 +1,7 @@
-import { EventBus } from '../utility/event-bus.ts'
+import { EventBus } from '../utility/event-bus';
 
 export default {
     toggle: () => {
-        EventBus.$emit('toggleProgress', { })
+        EventBus.$emit('toggleProgress', { });
     },
-}      
+};

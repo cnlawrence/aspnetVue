@@ -1,9 +1,9 @@
 import Axios from 'axios';
 
-const dataServicesUrl = 'https://devdataservices.acceptanceinsurance.com/fusion'
+const dataServicesUrl = 'https://devdataservices.acceptanceinsurance.com/fusion';
 
 export default {
-    async getUserSessionData(sessionId) {
+    async getUserSessionData(sessionId: string) {
         const credentials = { SESSIONID: sessionId};
         const dsInvoke = {
             service: 'ISeries',
@@ -20,4 +20,4 @@ export default {
         return response.data;
     }
 
-}
+};
