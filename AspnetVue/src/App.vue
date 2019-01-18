@@ -59,11 +59,11 @@ export default class App extends Vue {
 
     DataServices.getUserSessionData(sessionId)
       .then((result) => {
-        console.log(result)
+        console.log(JSON.stringify(result));
         alertMixin.success('Your sessionId is valid');
       })
       .catch((err) => {
-        alertMixin.error(err); 
+        alertMixin.error(`Dataservice Error: ${err.name} - ${err.message}`); 
       })
       .finally(() => {
         progressBarMixin.toggle();
