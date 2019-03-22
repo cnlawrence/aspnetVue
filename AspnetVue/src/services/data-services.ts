@@ -1,9 +1,16 @@
 import Axios from 'axios';
+import ISeriesResponse from './iseries-response';
+// import { vm } from '../main';
 
-const dataServicesUrl = 'https://devdataservices.acceptanceinsurance.com/fusion';
+export default class DataServices {
+    dataServicesUrl: string = '';
 
-export default {
+    constructor(dataServicesUrl: string) {
+        this.dataServicesUrl = dataServicesUrl
+    }
+    
     async getUserSessionData(sessionId: string) {
+
         const credentials = { SESSIONID: sessionId};
         const dsInvoke = {
             service: 'ISeries',
@@ -16,10 +23,12 @@ export default {
             }
         };
 
-        const response = await Axios.post(dataServicesUrl, dsInvoke);
+        // const dataServicesUrl = vm.$root.$data.dataServicesUrl;
+        const response = await Axios.post(this.dataServicesUrl, dsInvoke);
         this.checkISeriesResponse(response.data);
         return response.data;
-    },
+    }
+
     checkISeriesResponse(response: ISeriesResponse ){
         const session = response.data.content.webServiceXml.portalSession;
         const status = response.data.content.webServiceXml.status;
@@ -38,31 +47,3 @@ export default {
         }
     }
 };
-
-class ISeriesResponse {
-    type: string = '';
-    data!: {
-        status: number,
-        content: {
-            webServiceXml: {
-                portalSession: {
-                    sessionId: string,
-                    sessionHalt: boolean,
-                    haltTitle: string,
-                    haltMessage: string,
-                    validSession: boolean,
-                    validUser: boolean,
-                    user: string
-                },
-                inputData: any,
-                status: {
-                    success: boolean,
-                    title: string,
-                    message: string
-                }                
-            }
-        }
-    }
-    service: string = '';
-    invocationId: string = '';
-}

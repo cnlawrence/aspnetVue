@@ -57,7 +57,8 @@ export default class App extends Vue {
 
     progressBarMixin.toggle();
 
-    DataServices.getUserSessionData(sessionId)
+    const ds = new DataServices(this.$root.$data.dataServicesUrl);
+    ds.getUserSessionData(sessionId)
       .then((result) => {
         console.log(JSON.stringify(result));
         alertMixin.success('Your sessionId is valid');
