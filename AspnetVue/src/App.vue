@@ -13,6 +13,7 @@
       <Alerts/>
 
       <HelloWorld/>
+      <DataTable/>
     </v-content>
     <v-footer dark color="primary">
       <v-flex primary text-xs-center white--text> &copy; {{ new Date().getFullYear() }} Acceptance Insurance Company </v-flex>
@@ -29,12 +30,14 @@ import alertMixin  from './shared/alert-mixin'
 import progressBarMixin  from './shared/progress-bar-mixin';
 import ProgressBar from './components/ProgressBar.vue';
 import DataServices from './services/data-services';
+import DataTable from './components/DataTable.vue';
 
 @Component({  
   components: {
     HelloWorld,
     Alerts,
     ProgressBar,
+    DataTable
   }
 })
 
