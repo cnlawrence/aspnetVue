@@ -6,7 +6,7 @@
         <span class="font-weight-light">ASPNETCORE/VUE DEMO</span>
       </v-toolbar-title>
     </v-toolbar>
-    <v-content>    
+    <v-content>
       <!-- Progress bar component -->
       <ProgressBar/>
       <!-- Alerts bar component -->
@@ -29,10 +29,12 @@ import Alerts from './components/Alerts.vue';
 import alertMixin  from './shared/alert-mixin'
 import progressBarMixin  from './shared/progress-bar-mixin';
 import ProgressBar from './components/ProgressBar.vue';
-import DataServices from './services/data-services';
+import { DataServicesClient, defaultDataServicesClientOptions }  from '@acceptance/dataservices/build'
+import ISeriesResponse from './services/iseries-response'
 import DataTable from './components/DataTable.vue';
+import { EnvironmentType } from '@acceptance/dataservices/build/types';
 
-@Component({  
+@Component({
   components: {
     HelloWorld,
     Alerts,
@@ -42,32 +44,43 @@ import DataTable from './components/DataTable.vue';
 })
 
 export default class App extends Vue {
+  private sessionId: string = '';
   constructor() {
     super();
-    
+
   }
 
   mounted() {
     const urlParams = new URLSearchParams(window.location.search);
-    const sessionId = urlParams.get('sessionId');
-    
-    if (sessionId === null) {    
+    this.sessionId = urlParams.get('sessionId') !== null ? urlParams.get('sessionId')! : '' ;
+
+    if (this.sessionId === '') {
       console.log('SessionId is null')
       alertMixin.error('Something is wrong with the SessionId.');
-      
+
       return;
     }
 
     progressBarMixin.toggle();
 
-    const ds = new DataServices(this.$root.$data.dataServicesUrl);
-    ds.getUserSessionData(sessionId)
-      .then((result) => {
+    this.getAgentInformation();    
+  }
+
+  getAgentInformation(){
+    // EXAMPLE: Use to override specific default options 
+    // defaultDataServicesClientOptions.environmentTypeOverride = EnvironmentType.local;
+    // const client = new DataServicesClient(defaultDataServicesClientOptions);
+
+    const client = new DataServicesClient(); // Leave blank for default options
+    const response = client.invokeISeriesService('GetAgentInformation', {
+      SESSIONID: this.sessionId
+    }).then((result) => {
         console.log(JSON.stringify(result));
+        ISeriesResponse.checkISeriesResponse(result.data);
         alertMixin.success('Your sessionId is valid');
       })
       .catch((err) => {
-        alertMixin.error(`Dataservice Error: ${err.name} - ${err.message}`); 
+        alertMixin.error(`Dataservice Error: ${err.name} - ${err.message}`);
       })
       .finally(() => {
         progressBarMixin.toggle();

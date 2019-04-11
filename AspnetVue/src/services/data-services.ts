@@ -23,27 +23,8 @@ export default class DataServices {
             }
         };
 
-        // const dataServicesUrl = vm.$root.$data.dataServicesUrl;
         const response = await Axios.post(this.dataServicesUrl, dsInvoke);
-        this.checkISeriesResponse(response.data);
+        ISeriesResponse.checkISeriesResponse(response.data);
         return response.data;
-    }
-
-    checkISeriesResponse(response: ISeriesResponse ){
-        const session = response.data.content.webServiceXml.portalSession;
-        const status = response.data.content.webServiceXml.status;
-        if (session.sessionHalt) {            
-            const err = new Error();
-            err.name = session.haltTitle;
-            err.message = session.haltMessage;
-            throw err;
-        }
-
-        if (!status.success) {
-            const err = new Error();
-            err.name = status.title;
-            err.message = status.message;
-            throw err;
-        }
     }
 };
